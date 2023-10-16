@@ -21,7 +21,10 @@ const USER_PROP_LAST_DAILY_PING = 'userPropLastDailyPing';
  * from their browser in client-side Javascript via a calls to:
        Intl.DateTimeFormat().resolvedOptions().timeZone;
  * The value is then passed to your Add-on's server-side code and 
- * stored as user properties.    
+ * stored as user properties.
+ *
+ * If creating a Workspace Add-on (vs Editor Add-on), instead see:
+ *   https://developers.google.com/apps-script/add-ons/how-tos/access-user-locale
  */ 
 const USER_PROP_TIMEZONE = 'userPropTimezone';
 
@@ -31,6 +34,9 @@ const USER_PROP_TIMEZONE = 'userPropTimezone';
        Intl.DateTimeFormat().resolvedOptions().locale;
  * The value is then passed to your Add-on's server-side code and 
  * stored as user properties.    
+ *
+ * If creating a Workspace Add-on (vs Editor Add-on), instead see:
+ *   https://developers.google.com/apps-script/add-ons/how-tos/access-user-locale
  */ 
 const USER_PROP_LOCALE = 'userPropLocale';
 
