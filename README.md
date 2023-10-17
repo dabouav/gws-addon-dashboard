@@ -1,12 +1,26 @@
 # Instructions for creating a usage dashboard for your Google Workspace Add-on
 By: Dave Abouav
+<br>
 Last Updated: October 16, 2023
 
-At the moment, Add-ons in Google Workspace offer only basic usage analytics via the [Workspace Marketplace SDK](https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/googleapps_sdk_dashboard). These include install data broken out by domains and seats (for Workspace admin installs), and end-user installs 
+At the moment, Add-ons in Google Workspace offer only basic usage analytics via the [Workspace Marketplace SDK](https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/googleapps_sdk_dashboard). These include install data broken out by domains and seats (for Add-ons installed by Workspace admins), and individual end-user installs. This is useful information, but doesn't tell you much about who is actively using your Add-on, nor give you the ability to breakdown that usage by different dimensions.
 
-The code and instructions in this repo will help you gather and visualize more granular data, such as actual usage of your Add-on broken out by country, as well as logging specific events that correspond to usage you want to track (i.e. installs, use of particular features).
+The code and instructions in this repo will help you gather and visualize Add-on usage data, such as actual usage of your Add-on broken out by user characteristics. It also shows you how to log specific events that correspond to usage you want to track (i.e. new installs, uses of particular features, etc).
 
-## Step 1: Logging Data
+## Step 1: Prerequisites and Initial Setup
+
+### Prerequisites
+We make the assumption here that you already have a published Add-on in the Workspace Marketplace, and hence also a GCP project with billing enabled. 
+
+Also, this project requires use of Google BigQuery, which is not free to use (unlike Workspace APIs). While the cost is not typically high (a few dollars a month in my experience), you should be aware that it is not free and your billing account should be up-to-date as it will be charged. Note that Google sometimes offers up to $300 in free credits, which you could apply towards this accured cost.
+
+### Initial Setup
+To start, make sure to enable the Cloud Logging API in GCP for your project. You can find this API by searching for it in the Cloud Console, like so:
+<br>
+<img src="images/cloud-logging-api-search.png" width="700"/>
+
+
+## Step 2: Logging Data
 The code snippers included in this repository have everything you need to get started. You can copy/paste the contents of dashboard.gs into your project to get started. A few things to note:
 <ul>
   <li>The code assumes you have a user's timezone and locale stored (in specific user properties). If you don't already have a way to collect or store these, you can comment out the relevant lines that retrieve them, as well as their use in the objects passed to console.log(). You'll also need to remove references to them in the BigQuery queries shown later in these instructions. Note that if you do this, you won't be able to partition your data by the user's country or language.</li>
@@ -18,7 +32,4 @@ The code snippers included in this repository have everything you need to get st
 ...
 
 
-## Step 2: Routing Data
-To start, make sure to enable the Cloud Logging API in GCP for your project. You can find this API by searching for it in the Cloud Console, like so:
-<br>
-<img src="images/cloud-logging-api-search.png" width="700"/>
+## Step 3: Routing Data
