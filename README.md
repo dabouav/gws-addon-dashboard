@@ -45,7 +45,7 @@ To start, make sure to enable the Cloud Logging API in GCP for your project. You
 ### Events BigQuery Query
 
 
-## Step 5: Dashboards in Looker Studio
+## Step 5: Creating Dashboards in Looker Studio
 
 ### Active Usage Dashboard Page
 
@@ -54,7 +54,3 @@ To start, make sure to enable the Cloud Logging API in GCP for your project. You
 ### Specific Event Drilldown Dashboard Page
 
 
-...
-
-
-## Step 3: Routing Data
