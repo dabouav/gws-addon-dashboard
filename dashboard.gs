@@ -42,25 +42,23 @@ const USER_PROP_LOCALE = 'userPropLocale';
 
 /**
  * Returns an identifier that is (mostly) unique to each user of this Add-on.
- * There is more than one way to do this. For example, you could compute
- * a hash on the user's email address. Alternately, you could log the exact
- * time (in ms) that the user first used your Add-on, which serves both as a
- * fairly unique identifier, as well as a measure of how long this user
- * has been using your Add-on.
+ * This uid is passed to Cloud Logging, which helps in disambiguating users
+ * so that metrics like monthly active users can be calculated.
  * 
  * @returns {string}
  */
 function getUid() {
   var up = PropertiesService.getUserProperties();
 
-  var addonUid = up.getProperty('addonUid');
-  if (!addonUid) {
-    var dt = new Date();
-    addonUid = dt.getTime().toString();
-    up.setProperty('addonUid', addonUid);
+  var addOnUid = up.getProperty('addOnUid');
+  if (!addOnUid) {
+    var userEmail = Session.getEffectiveUser().getEmail();
+    addOnUid = _computeUidFromEmail(userEmail);
+
+    up.setProperty('addonUid', addOnUid);
   }
 
-  return addonUid;
+  return addOnUid;
 }
 
 /**
@@ -218,3 +216,35 @@ function logEvent(eventName, eventSpecificDetails)
 
   console.log({message: addOnName + 'EventLog', eventData: parameters});
 }
+
+/**
+ * Private method that converts an email into a hash string that can be
+ * used as a semi-unique user id.
+ *  
+ * @param {string} - email of user using Add-on
+ * 
+ * @returns {string}
+ */
+function _computeUidFromEmail(email) {
+  var signatureStr = '';
+  var signature = Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, email, 
+    Utilities.Charset.US_ASCII);
+
+  // convert digest byte array to printable stirng
+  for (var i=0; i < signature.length; i++) {
+    var byte = signature[i];
+    if (byte < 0) {
+      byte += 256;
+    }
+
+    var byteStr = byte.toString(16);
+    if (byteStr.length == 1) {
+      byteStr = '0' + byteStr;
+    }
+
+    signatureStr += byteStr;
+  }
+
+  return signatureStr;
+}
+
