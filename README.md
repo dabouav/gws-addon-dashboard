@@ -55,7 +55,7 @@ Here's an example of how you might log an event that takes place when a user fir
 Here's an example of how you might log an event that takes place when your Add-on has successfully processed a file:
 <code>logEvent('EVENT_FILE_PROCESSED', {'fileName': 'report.pdf', 'fileSizeKB': 68.8})</code> 
 
-Once your calls are in place, you should confirm see the corresponding logs entries in Google Cloud [Logs Explorer](https://console.cloud.google.com/logs/query). If you don't see them, be sure you're checking logs for the correct GCP project, and have waited a minute or two for the logs entries to show up. As an example, a Flubaroo log entry from <code>logDailyPing()</code> is shown in the image below. Note that the actual usage data is in the jsonPayload object:
+Once your calls are in place, you should confirm see the corresponding logs entries in Google Cloud [Logs Explorer](https://console.cloud.google.com/logs/query). If you don't see them, be sure you're checking logs for the correct GCP project, have waited a minute or two for the logs entries to show up, and have the correct time window set. As an example, a Flubaroo log entry from <code>logDailyPing()</code> is shown in the image below. Note that the actual usage data is in the jsonPayload object:
 <br><br>
 <img src="images/logs-explorer-example.png" width="700"/>
 
