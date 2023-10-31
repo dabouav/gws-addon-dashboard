@@ -84,17 +84,19 @@ On the Log Router page, click "Create sink". For the information requested, ente
     </ul>
   </li>
   <li><b>Choose logs to include in sink:</b>
-    <br>Copy/paste the following filter into the "inclusion filter" box, but replace "flubarooDailyPing" with <code>addOnName</code> + "DailyPing", and replace "&lt;project-id-your-project-id-here&gt;" with the ID of your GCP project:
-  <br>
-    <code>"flubarooDailyPing"<br>
-resource.type="app_script_function"<br>
-logName="projects/&lt;project-id-your-project-id-here&gt;/logs/script.googleapis.com%2Fconsole_logs"<br>
-severity=DEBUG</code>
+    <br>Copy/paste the filter shown below into the "inclusion filter" box, but replace "flubarooDailyPing" with <code>addOnName</code> + "DailyPing", and replace "&lt;project-id-your-project-id-here&gt;" with the ID of your GCP project.
   </li>
 </ul>
 
 Click "Create Sink". If you encounter errors trying to create the BigQuery dataset, or the new sink, ensure that you have all of the necessary IAM permissions, and have enabled Cloud Logging API in your project.<br>
 
+Inclusion Filter:
+```
+"flubarooDailyPing"
+resource.type="app_script_function"
+logName="projects/<project-id-your-project-id-here>/logs/script.googleapis.com%2Fconsole_logs"
+severity=DEBUG
+```
 
 ### Route Event Logs
 Repeat the same exact steps in "Route Active Usage Logs" above, but with these changes:
