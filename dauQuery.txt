@@ -1,7 +1,7 @@
 -- This file contains the BigQuery query for "DAU Query". See README.gs for full instructions before executing this query.
 -- Also note the following before executing this query:
 -- * Replace all occurrences of "<your-gcp-project-id>" with your GCP project's ID.
--- * Replace all occurrences of "<yourDataSetName>" with your table name (i.e. "flubarooUsageData")
+-- * Replace all occurrences of "<yourDataSetName>" with your data set name (i.e. "flubarooUsageData")
 -- * Run this query once with the "CREATE OR REPLACE TABLE" statement to create the
 --   table initially. Afterwards comment out that line, and uncomment the "INSERT" statement 
 --   that comes after it (to be used from then on).
