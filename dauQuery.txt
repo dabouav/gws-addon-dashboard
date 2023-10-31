@@ -1,7 +1,7 @@
 -- This file contains the BigQuery query for "DAU Query". See README.gs for full instructions before executing this query.
 -- Also note the following before executing this query:
 -- * Replace all occurrences of "<your-gcp-project-id>" with your GCP project's ID.
--- * Replace all occurrences of "<yourTableName>" with your table name (see README.gs)
+-- * Replace all occurrences of "<yourDataSetName>" with your table name (i.e. "flubarooUsageData")
 -- * Run this query once with the "CREATE OR REPLACE TABLE" statement to create the
 --   table initially. Afterwards comment out that line, and uncomment the "INSERT" statement 
 --   that comes after it (to be used from then on).
@@ -486,8 +486,8 @@ CREATE TEMP FUNCTION TimezoneToCountry(tz STRING)
 -- first create the table. After that, comment out that line and uncomment the next line that
 -- starts with "INSERT", which will insert new rows into that table each time this query is run. 
 
-CREATE OR REPLACE TABLE `<your-gcp-project-id>.<yourTableName>.dailyActiveUsers` AS 
---INSERT `<your-gcp-project-id>.<yourTableName>.dailyActiveUsers` (date, country, dau1, dau7, dau30) 
+CREATE OR REPLACE TABLE `<your-gcp-project-id>.<yourDataSetName>.dailyActiveUsers` AS 
+--INSERT `<your-gcp-project-id>.<yourDataSetName>.dailyActiveUsers` (date, country, dau1, dau7, dau30) 
 
 SELECT DATE(DATETIME(calc_date)) as date, A.country as country, A.DAU30 as dau30, IFNULL(BC.DAU7, 0) as dau7, IFNULL(BC.DAU1, 0) as dau1
 FROM 
@@ -495,7 +495,7 @@ FROM
 -- Pull 30 DAU by counting distinct user ids over past 30 days. Group by country (based on timezone)
 (SELECT TimezoneToCountry(jsonPayload.pingData.timezone) as country,
        COUNT(DISTINCT(jsonPayload.pingData.uid)) AS DAU30, 
-FROM `<your-gcp-project-id>.<yourTableName>.script_googleapis_com_console_logs_*`
+FROM `<your-gcp-project-id>.<yourDataSetName>.script_googleapis_com_console_logs_*`
 WHERE 
       DATETIME(calc_date) >= DATETIME(timestamp)
 AND
@@ -516,7 +516,7 @@ FROM
 -- Pull 7 DAU by counting distinct user ids over past 7 days. Group by country (based on timezone)
 (SELECT TimezoneToCountry(jsonPayload.pingData.timezone) as country,
        COUNT(DISTINCT(jsonPayload.pingData.uid)) AS DAU7, 
-FROM `<your-gcp-project-id>.<yourTableName>.script_googleapis_com_console_logs_*`
+FROM `<your-gcp-project-id>.<yourDataSetName>.script_googleapis_com_console_logs_*`
 WHERE 
       DATETIME(calc_date) >= DATETIME(timestamp)
 AND
@@ -532,7 +532,7 @@ FULL JOIN
 -- Pull 1 DAU by counting distinct user ids over past 1 day. Group by country (based on timezone)
 (SELECT TimezoneToCountry(jsonPayload.pingData.timezone) as country,
        COUNT(DISTINCT(jsonPayload.pingData.uid)) AS DAU1, 
-FROM `<your-gcp-project-id>.<yourTableName>.script_googleapis_com_console_logs_*`
+FROM `<your-gcp-project-id>.<yourDataSetName>.script_googleapis_com_console_logs_*`
 WHERE 
       DATETIME(calc_date) >= DATETIME(timestamp)
 AND
