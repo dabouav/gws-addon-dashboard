@@ -114,7 +114,7 @@ Here is an example of Flubaroo's Active Usage log routing sink:
 Next we'll want to create 2 BigQuery queries, and schedule them to run daily. To get started, visit the (BigQuery Studio) [https://console.cloud.google.com/bigquery] page in the GCP console, and make sure your project is selected in the project selector at the top.
 
 ### Active Usage BigQuery Query
-Click the "Compose a New Query" button to start a blank query. Copy the contents of (dauQuery.txt)[/dauQuery.txt] file in this repository, and paste the contents into the query. Save the query with a name like "DAU Query", but don't run the query yet. 
+Click the "Compose a New Query" button to start a blank query. Copy the contents of (dauQuery.txt)[dauQuery.txt] file in this repository, and paste the contents into the query. Save the query with a name like "DAU Query", but don't run the query yet. 
 
 At the top of the query are instructions to replace the Project ID and Table Set name. Review them, then use the query editor's search and replace tool (Control+F on PC or Chrome OS, Command+F on Mac) to replace the occurrences of <code>&lt;your-gcp-project-id&gt;</code> and <code>&lt;yourDatSetName&gt;</code>.
 
@@ -128,7 +128,7 @@ Once it executes successfully, you should notice a new BigQuery Data Set and Tab
 Comment our create then insert...
 
 ### Event BigQuery Query
-As in the prior section, click the "Compose a New Query" button to start a blank query. This time copy the contents of (eventsQuery.txt)[/eventsQuery.txt] file in this repository, and paste the contents into the query. Save the query with a name like "Events Query", but don't run the query yet. 
+As in the prior section, click the "Compose a New Query" button to start a blank query. This time copy the contents of (eventsQuery.txt)[eventsQuery.txt] file in this repository, and paste the contents into the query. Save the query with a name like "Events Query", but don't run the query yet. 
 
 At the top of the query are instructions to replace the Project ID and Table Set name. Review them, then use the query editor's search and replace tool (Control+F on PC or Chrome OS, Command+F on Mac) to replace the occurrences of <code>&lt;your-gcp-project-id&gt;</code> and <code>&lt;yourDatSetName&gt;</code>.
 
