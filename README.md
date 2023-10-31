@@ -1,7 +1,7 @@
 # Instructions for creating a usage dashboard for your Google Workspace Add-on
 By: Dave Abouav
 <br>
-Last Updated: October 16, 2023
+Last Updated: October 30, 2023
 
 At the moment, Add-ons in Google Workspace offer only basic usage analytics via the [Workspace Marketplace SDK](https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/googleapps_sdk_dashboard). These include install data broken out by domains and seats (for Add-ons installed by Workspace admins), and individual end-user installs. This is useful information, but doesn't tell you much about who is actively using your Add-on, nor give you the ability to breakdown that usage by different dimensions.
 
@@ -77,7 +77,7 @@ On the Log Router page, click "Create sink". For the information requested, ente
       <li><b>Select BigQuery dataset:</b></li>
       <ul>
         <li>Select "Create new BigQuery dataset"</li>
-        <li>In the "Create dataset" panel that opens, enter a dataset ID such as <code>addOnName</code> + "UsageData"</code> (i.e. <code>flubarooUsageData</code>)</li>
+        <li>In the "Create dataset" panel that opens, enter a dataset ID such as <code>addOnName</code> + "UsageData"</code> (i.e. <code>flubarooUsageData</code>). Remember this data set name as you'll reference it again later when setting up your BigQuery query.</li>
         <li>Ensure "Enable table expiration" is <b>not</b> checked.</li>
         <li>Accept all other defaults and create the dataset.</li>
       </ul>
@@ -111,11 +111,28 @@ Here is an example of Flubaroo's Active Usage log routing sink:
 
 
 ## Step 4: Create and Schedule BigQuery Queries
+Next we'll want to create 2 BigQuery queries, and schedule them to run daily. To get started, visit the (BigQuery Studio) [https://console.cloud.google.com/bigquery] page in the GCP console, and make sure your project is selected in the project selector at the top.
 
 ### Active Usage BigQuery Query
+Click the "Compose a New Query" button to start a blank query. Copy the contents of (dauQuery.txt)[/dauQuery.txt] file in this repository, and paste the contents into the query. Save the query with a name like "DAU Query", but don't run the query yet. 
+
+At the top of the query are instructions to replace the Project ID and Table Set name. Review them, then use the query editor's search and replace tool (Control+F on PC or Chrome OS, Command+F on Mac) to replace the occurrences of <code>&lt;your-gcp-project-id&gt;</code> and <code>&lt;yourDatSetName&gt;</code>.
+
+Save the query again, then run it. If it fails to execute, be sure you copy/pasted it correctly, and correctly indicated the name of your GCP Project (it should be the same one that your Add-on is associated with), and the name of your data set (this is the same data set you created when setting up log routing).
+
+Once it executes successfully, you should notice a new BigQuery Data Set and Table, similar to the ones shown below:
+<br><br>
+<img src="images/bigquery-datasets-and-tables.png" width="700"/>
+
+
+Comment our create then insert...
 
 ### Event BigQuery Query
+As in the prior section, click the "Compose a New Query" button to start a blank query. This time copy the contents of (eventsQuery.txt)[/eventsQuery.txt] file in this repository, and paste the contents into the query. Save the query with a name like "Events Query", but don't run the query yet. 
 
+At the top of the query are instructions to replace the Project ID and Table Set name. Review them, then use the query editor's search and replace tool (Control+F on PC or Chrome OS, Command+F on Mac) to replace the occurrences of <code>&lt;your-gcp-project-id&gt;</code> and <code>&lt;yourDatSetName&gt;</code>.
+
+Save the query again, then run it. If it fails to execute, be sure you copy/pasted it correctly, and correctly indicated the name of your GCP Project (it should be the same one that your Add-on is associated with), and the name of your data set (this is the same data set you created when setting up log routing).
 
 ## Step 5: Creating Dashboards in Looker Studio
 
