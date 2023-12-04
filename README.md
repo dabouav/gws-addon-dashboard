@@ -124,8 +124,18 @@ Once it executes successfully, you should notice a new BigQuery Data Set and Tab
 <br><br>
 <img src="images/bigquery-datasets-and-tables.png" width="700"/>
 
+Next, search for the line that starts with "CREATE OR REPLACE TABLE". Comment out this line by adding two dashes (--) infront of it. On the line immediately following, remove the two dashes that precede the word "INSERT". Once done, save your change. Now when the script runs in the future, it will insert new data in the table you just created, rather than creating a new table each time it runs.
 
-Comment our create then insert...
+Finally, you'll need to schedule this query to run each day. To do so, click the "Schedule" button at the top of the query editor. In the "New scheduled query" pane that opens, enter the following:
+<ul>
+  <li>Give your query a name, like "Scheduled DAU Query".</li>
+  <li>For the "Schedule options" section, select a "Repeat frequency" value of "Days".</li>
+  <li>For the "Schedule options" section, select a "At" time of your choosing. Note that because this determines the approximate time your query will run, it also determines the ending time window used when evaluating logs for that day's table entries. For example, if you select a start time of 12:00 UTC, then your daily active users (1DAU) for that day will be those with log entry timestamps from 12:00:00 UTC on the day the script runs, to 12:00:00 UTC the previous day.</li>
+  <li>Ensure the script is configured to "Start now" and "End never".</li>
+  <li>Leave all other fields with their default value. In particular, do **not** choose to "Set a destination table for query results", as this is already taken care of in the query.</li>
+</ul>
+
+Once configured, click "Save". You can see your scheduled query in the (Scheduled Queries)[https://console.cloud.google.com/bigquery/scheduled-queries]  section of BigQuery. Note that the scheduled makes a _copy_ of your query at the time of schedule creation. So if you make changes to your query in the future you will need to delete the old scheduled query and then create a new schedule.
 
 ### Event BigQuery Query
 As in the prior section, click the "Compose a New Query" button to start a blank query. This time copy the contents of (eventsQuery.txt)[/eventsQuery.txt] file in this repository, and paste the contents into the query. Save the query with a name like "Events Query", but don't run the query yet. 
@@ -133,6 +143,22 @@ As in the prior section, click the "Compose a New Query" button to start a blank
 At the top of the query are instructions to replace the Project ID and Table Set name. Review them, then use the query editor's search and replace tool (Control+F on PC or Chrome OS, Command+F on Mac) to replace the occurrences of <code>&lt;your-gcp-project-id&gt;</code> and <code>&lt;yourDatSetName&gt;</code>.
 
 Save the query again, then run it. If it fails to execute, be sure you copy/pasted it correctly, and correctly indicated the name of your GCP Project (it should be the same one that your Add-on is associated with), and the name of your data set (this is the same data set you created when setting up log routing).
+
+Once it executes successfully, you should notice a new BigQuery Data Set and Table, similar to the ones shown in the image in the prior section above.
+
+Next, search for the line that starts with "CREATE OR REPLACE TABLE". Comment out this line by adding two dashes (--) infront of it. On the line immediately following, remove the two dashes that precede the word "INSERT". Once done, save your change. Now when the script runs in the future, it will insert new data in the table you just created, rather than creating a new table each time it runs.
+
+Finally, you'll need to schedule this query to run each day. To do so, click the "Schedule" button at the top of the query editor. In the "New scheduled query" pane that opens, enter the following:
+<ul>
+  <li>Give your query a name, like "Scheduled Events Query".</li>
+  <li>For the "Schedule options" section, select a "Repeat frequency" value of "Days".</li>
+  <li>For the "Schedule options" section, select a "At" time of your choosing. Note that because this determines the approximate time your query will run, it also determines the ending time window used when evaluating logs for that day's table entries. For example, if you select a start time of 12:00 UTC, then your events included for that day will be those with log entry timestamps from 12:00:00 UTC on the day the script runs, to 12:00:00 UTC the previous day.</li>
+  <li>Ensure the script is configured to "Start now" and "End never".</li>
+  <li>Leave all other fields with their default value. In particular, do **not** choose to "Set a destination table for query results", as this is already taken care of in the query.</li>
+</ul>
+
+Once configured, click "Save". You can see your scheduled query in the (Scheduled Queries)[https://console.cloud.google.com/bigquery/scheduled-queries]  section of BigQuery. Note that the scheduled makes a _copy_ of your query at the time of schedule creation. So if you make changes to your query in the future you will need to delete the old scheduled query and then create a new schedule.
+
 
 ## Step 5: Creating Dashboards in Looker Studio
 
