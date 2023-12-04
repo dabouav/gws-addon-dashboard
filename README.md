@@ -14,13 +14,7 @@ We make the assumption here that you already have a published Add-on in the Work
 
 This project requires use of Google BigQuery, which is not free to use (unlike Workspace APIs). While the cost is not typically high (a few dollars a month in my experience), you should be aware that it is not free and your billing account should be up-to-date as it will be charged. Note that Google Cloud sometimes offers up to $300 in free credits, which you could apply towards this accured cost. While in general there _can_ be costs associated with long-term logs storage, we'll be using the default log expiration window of 30 days, which is free.
 
-You will also need Google Cloud IAM permissions in this GCP project to enable the Cloud Logging API, create Logging Sinks, and create a BigQuery dataset in which you can create and write to tables, as well as create and schedule queries. If you don't have this type of GCP access, you can ask someone who does to follow these steps on your behalf. You will only need to be granted read access to the final BigQuery tables that are used to generate dashboards in Looker Studio. A list of the required IAM permissions are shown below:
-
-<ul>
-  <li>one</li>
-  <li>two</li>
-
-</ul>
+You will also need Google Cloud IAM permissions in this GCP project to enable the Cloud Logging API, create Logging Sinks, and create a BigQuery dataset in which you can create and write to tables, as well as create and schedule queries. If you don't have this type of GCP access, you can ask someone who does to follow these steps on your behalf. You will only need to be granted read access to the final BigQuery tables that are used to generate dashboards in Looker Studio.
 
 ### Initial Setup
 To start, make sure to enable the Cloud Logging API in GCP for your project. You can find this API by searching for it in the Cloud Console, like so:
@@ -162,7 +156,23 @@ Once configured, click "Save". You can see your scheduled query in the [Schedule
 
 ## Step 5: Creating Dashboards in Looker Studio
 
+[LookerStudio](https://lookerstudio.google.com) (formerly DataStudio) is a free tool from Google for visualizing data and sharing reports or dashboards. It can connect to a variety of data sources, including BigQuery tables. This section discusses how to set up dashboard in Looker Studio to visualize Active Usage and Events for your Add-on.
+
+### Setup Data Sources and Report
+
+In [LookerStudio](https://lookerstudio.google.com), choose "Create > Data source". Select "BigQuery" as the type of data source. You will be asked to authorize access, and select the GCP project associated with your BigQuery tables. After selecting it, you should see the BigQuery Datasets you created in Step 4. Select the one associated with Active Usage, and then click on the name of the table in that Dataset (<code>dailyActiveUsers</code>). Your selection should look similar to this:
+
+<img src="images/looker-studio-table-selection.png" width="800"/>
+
+Be sure to give it a name (i.e. "DailyActiveUsers Table" in the top-left. Click "Connect" in the top-right once ready to add this Data source to your Looker Studio instance.
+
+Repeat this process a second time for the Event Tallies table.
+
+Finally, from the LookerStudio home page click "Create > Report". You will be prompted to add data to the report. Click the "My data sources" tab and select one the 2 tables you just added as Data Sources. Once you add it you will be dropped into the LookerStudio report editor. To add the other table as a data source for this report, click on the "Add data" button in the editor's toolbar and follow the same process again for ther other table.
+
 ### Active Usage Dashboard Page
+
+
 
 ### Event Dashboard Page
 
