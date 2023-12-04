@@ -488,7 +488,7 @@ CREATE TEMP FUNCTION TimezoneToCountry(tz STRING)
 -- starts with "INSERT", which will insert new rows into that table each time this query is run. 
 
 CREATE OR REPLACE TABLE `<your-gcp-project-id>.<yourDataSetName>.dailyActiveUsers` AS 
---INSERT `<your-gcp-project-id>.<yourDataSetName>.dailyActiveUsers` (date, country, dau1, dau7, dau30) 
+--INSERT `<your-gcp-project-id>.<yourDataSetName>.dailyActiveUsers` (date, country, dau30, dau7, dau1) 
 
 SELECT DATE(DATETIME(calc_date)) as date, A.country as country, A.DAU30 as dau30, IFNULL(BC.DAU7, 0) as dau7, IFNULL(BC.DAU1, 0) as dau1
 FROM 
