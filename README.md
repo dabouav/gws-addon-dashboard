@@ -130,9 +130,9 @@ Finally, you'll need to schedule this query to run each day. To do so, click the
 <ul>
   <li>Give your query a name, like "Scheduled DAU Query".</li>
   <li>For the "Schedule options" section, select a "Repeat frequency" value of "Days".</li>
-  <li>For the "Schedule options" section, select a "At" time of your choosing. Note that because this determines the approximate time your query will run, it also determines the ending time window used when evaluating logs for that day's table entries. For example, if you select a start time of 12:00 UTC, then your daily active users (1DAU) for that day will be those with log entry timestamps from 12:00:00 UTC on the day the script runs, to 12:00:00 UTC the previous day.</li>
+  <li>For the "Schedule options" section, select a "At" time of your choosing. Note that because this determines the approximate time your query will run, it also determines the ending time window used when evaluating logs for that day's table entries. For example, if you select a start time of 12:00 UTC, then your daily active users (1DAU) for that day will be those with log entry timestamps from 12:00:00 UTC on the day the script runs, back to 12:00:00 UTC the previous day.</li>
   <li>Ensure the script is configured to "Start now" and "End never".</li>
-  <li>Leave all other fields with their default value. In particular, do **not** choose to "Set a destination table for query results", as this is already taken care of in the query.</li>
+  <li>Leave all other fields with their default value. In particular, do <b>not</b> choose to "Set a destination table for query results", as this is already taken care of in the query.</li>
 </ul>
 
 Once configured, click "Save". You can see your scheduled query in the [Scheduled Queries](https://console.cloud.google.com/bigquery/scheduled-queries)  section of BigQuery. Note that the scheduled makes a _copy_ of your query at the time of schedule creation. So if you make changes to your query in the future you will need to delete the old scheduled query and then create a new schedule.
@@ -152,9 +152,9 @@ Finally, you'll need to schedule this query to run each day. To do so, click the
 <ul>
   <li>Give your query a name, like "Scheduled Events Query".</li>
   <li>For the "Schedule options" section, select a "Repeat frequency" value of "Days".</li>
-  <li>For the "Schedule options" section, select a "At" time of your choosing. Note that because this determines the approximate time your query will run, it also determines the ending time window used when evaluating logs for that day's table entries. For example, if you select a start time of 12:00 UTC, then your events included for that day will be those with log entry timestamps from 12:00:00 UTC on the day the script runs, to 12:00:00 UTC the previous day.</li>
+  <li>For the "Schedule options" section, select a "At" time of your choosing. Note that because this determines the approximate time your query will run, it also determines the ending time window used when evaluating logs for that day's table entries. For example, if you select a start time of 12:00 UTC, then your events included for that day will be those with log entry timestamps from 12:00:00 UTC on the day the script runs, back to 12:00:00 UTC the previous day.</li>
   <li>Ensure the script is configured to "Start now" and "End never".</li>
-  <li>Leave all other fields with their default value. In particular, do **not** choose to "Set a destination table for query results", as this is already taken care of in the query.</li>
+  <li>Leave all other fields with their default value. In particular, do <b>not</b> choose to "Set a destination table for query results", as this is already taken care of in the query.</li>
 </ul>
 
 Once configured, click "Save". You can see your scheduled query in the [Scheduled Queries](https://console.cloud.google.com/bigquery/scheduled-queries)   section of BigQuery. Note that the scheduled makes a _copy_ of your query at the time of schedule creation. So if you make changes to your query in the future you will need to delete the old scheduled query and then create a new schedule.
