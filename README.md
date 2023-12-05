@@ -151,12 +151,12 @@ Finally, you'll need to schedule this query to run each day. To do so, click the
   <li>Leave all other fields with their default value. In particular, do <b>not</b> choose to "Set a destination table for query results", as this is already taken care of in the query.</li>
 </ul>
 
-Once configured, click "Save". You can see your scheduled query in the [Scheduled Queries](https://console.cloud.google.com/bigquery/scheduled-queries)   section of BigQuery. Note that the scheduled makes a _copy_ of your query at the time of schedule creation. So if you make changes to your query in the future you will need to delete the old scheduled query and then create a new schedule.
+Once configured, click "Save". You can see your scheduled query in the [Scheduled Queries](https://console.cloud.google.com/bigquery/scheduled-queries)   section of BigQuery. Note that the scheduled makes a _copy_ of your query at the time of schedule creation. So if you make changes to your query in the future you will need to edit the copy contained in the scheduled query entry, or just delete the old scheduled query and then create a new schedule from the original query.
 
 
 ## Step 5: Creating Dashboards in Looker Studio
 
-[LookerStudio](https://lookerstudio.google.com) (formerly DataStudio) is a free tool from Google for visualizing data and sharing reports or dashboards. It can connect to a variety of data sources, including BigQuery tables. This section discusses how to set up dashboard in Looker Studio to visualize Active Usage and Events for your Add-on.
+[LookerStudio](https://lookerstudio.google.com) (formerly DataStudio) is a free tool from Google for visualizing data and sharing reports or dashboards. It can connect to a variety of data sources, including BigQuery tables. This section discusses how to set up dashboard in Looker Studio to visualize data for your Add-on.
 
 ### Setup Data Sources and Report
 
@@ -164,17 +164,81 @@ In [LookerStudio](https://lookerstudio.google.com), choose "Create > Data source
 
 <img src="images/looker-studio-table-selection.png" width="800"/>
 
-Be sure to give it a name (i.e. "DailyActiveUsers Table" in the top-left. Click "Connect" in the top-right once ready to add this Data source to your Looker Studio instance.
+Give the data source the name "DailyActiveUsers Table" in the top-left. Click the "Connect" button in the top-right once ready to add this data source to your Looker Studio instance.
 
-Repeat this process a second time for the Event Tallies table.
+Repeat this same process a second time for the event data, calling the table the "EventTallies Table".
 
-Finally, from the LookerStudio home page click "Create > Report". You will be prompted to add data to the report. Click the "My data sources" tab and select one the 2 tables you just added as Data Sources. Once you add it you will be dropped into the LookerStudio report editor. To add the other table as a data source for this report, click on the "Add data" button in the editor's toolbar and follow the same process again for ther other table.
+Finally, from the LookerStudio home page click "Create > Report". You will be prompted to add a data source to the report. Click the "My data sources" tab and select the "DailyActiveUsers Table" you just added as Data Sources. Once you add it you will be dropped into the LookerStudio report editor. Next, add the "EventTallies Table" as a data source for this report too by clicking on the "Add data" button in the editor's toolbar and selecting it from the list in "My data sources".
 
 ### Active Usage Dashboard Page
 
+We can add a number of different charts to visualize active usage. Below are a few examples.
 
+**Tip: If you run out of room on the page for your charts, you can increase the size of the page from "Page > Current page settings > Style".
+
+### Time Series of DAU30 (30 Day Active Users)
+Click the "Add a chart" button in the LookerStudio toolbar and select "Time series", as shown below:
+
+<img src="images/looker-studio-add-timeseries-chart.png" width="700"/>
+
+Place the time series chart object somewhere on the page, and use these options for the Chart "Setup":
+<ul>
+  <li>
+    Data Source: DailyActiveUsers Table
+    Date Range Dimention: date
+    Dimension: date
+    Metric: SUM dau30
+  </li>
+</ul>
+
+The image below shows the settings:
+
+<img src="images/looker-studio-add-dau30-chart.png" width="800"/>
+
+### Time Series of DAU1 (Single Day Daily Active Users)
+Duplicate the "Time Series of 30DAU" chart you just created. In the duplicate chart, change "Metric > dau30" to "Metric > dau1".
+
+### Time Series of 30DAU - By Country
+Duplicate the "Time Series of 30DAU" chart you created earlier. In the duplicate chart, for "Drill Down > Breakdown Dimension" add the "country" field. This will give you a chart of 30DAU usage with a seperate series per country.
+
+### Map of Usage by Country
+Click the "Add a chart" button in the LookerStudio toolbar and select "Geo Chart".
+
+Place the geo chart object somewhere on the page, and use these options for the Chart "Setup":
+<ul>
+  <li>
+    Data Source: DailyActiveUsers Table
+    Date Range Dimention: date
+    Geo Dimension: country
+    Metric: SUM dau30
+    Default date range: Custom > Today
+  </li>
+</ul>
+
+### Table of Usage by Country
+Click the "Add a chart" button in the LookerStudio toolbar and select "Table with bars".
+
+Place the table chart object somewhere on the page, and use these options for the Chart "Setup":
+<ul>
+  <li>
+    Data Source: DailyActiveUsers Table
+    Date Range Dimention: date
+    Dimension: country
+    Metric: SUM dau30
+    Rows per page: 100
+    Sort: SUM dau30 Descending
+    Default date range: Custom > Today
+  </li>
+</ul>
+
+### Customizing Your Dasboard
+You can add text boxes, chart headers, fitlers, and various other stylings to customize your dashboard to your liking. The image below shows the final product for the usage page of Flubaroo's dashboard:
+
+<img src="images/looker-studio-usage-dash-page.png" width=800 />
 
 ### Event Dashboard Page
+
+Next we'll add a second page to this dashboard that is specific to events.
 
 ### Specific Event Drilldown Dashboard Page
 
