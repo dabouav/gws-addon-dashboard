@@ -183,12 +183,10 @@ Click the "Add a chart" button in the LookerStudio toolbar and select "Time seri
 
 Place the time series chart object somewhere on the page, and use these options for the Chart "Setup":
 <ul>
-  <li>
-    Data Source: DailyActiveUsers Table
-    Date Range Dimention: date
-    Dimension: date
-    Metric: SUM dau30
-  </li>
+  <li>Data Source: DailyActiveUsers Table</li>
+  <li>Date Range Dimention: date</li>
+  <li>Dimension: date</li>
+  <li>Metric: SUM dau30</li>
 </ul>
 
 The image below shows the settings:
@@ -206,13 +204,11 @@ Click the "Add a chart" button in the LookerStudio toolbar and select "Geo Chart
 
 Place the geo chart object somewhere on the page, and use these options for the Chart "Setup":
 <ul>
-  <li>
-    Data Source: DailyActiveUsers Table
-    Date Range Dimention: date
-    Geo Dimension: country
-    Metric: SUM dau30
-    Default date range: Custom > Today
-  </li>
+  <li>Data Source: DailyActiveUsers Table</li>
+  <li>Date Range Dimention: date</li>
+  <li>Geo Dimension: country</li>
+  <li>Metric: SUM dau30</li>
+  <li>Default date range: Custom > Today</li>
 </ul>
 
 ### Table of Usage by Country
@@ -220,15 +216,13 @@ Click the "Add a chart" button in the LookerStudio toolbar and select "Table wit
 
 Place the table chart object somewhere on the page, and use these options for the Chart "Setup":
 <ul>
-  <li>
-    Data Source: DailyActiveUsers Table
-    Date Range Dimention: date
-    Dimension: country
-    Metric: SUM dau30
-    Rows per page: 100
-    Sort: SUM dau30 Descending
-    Default date range: Custom > Today
-  </li>
+  <li>Data Source: DailyActiveUsers Table</li>
+  <li>Date Range Dimention: date</li>
+  <li>Dimension: country</li>
+  <li>Metric: SUM dau30</li>
+  <li>Rows per page: 100
+  <li>Sort: SUM dau30 Descending</li>
+  <li>Default date range: Custom > Todayu</li>
 </ul>
 
 ### Customizing Your Dasboard
@@ -238,7 +232,31 @@ You can add text boxes, chart headers, fitlers, and various other stylings to cu
 
 ### Event Dashboard Page
 
-Next we'll add a second page to this dashboard that is specific to events.
+Next we'll add a second page to this dashboard that is specific to events. Click "Add Page" from the toolbar, and insert a new chart of type "Table". Configure the chart using the following options:
+<ul>
+  <li>Data Source: EventTallies Table</li>
+  <li>Date Range Dimention: date</li>
+  <li>Dimensions:
+    <ul>
+      <li>eventName</li>
+      <li>eventSpecificDetailsString</li>
+    </li></ul></li></li>
+  <li>Metric:
+    <ul>
+      <li>eventCount</li>
+      <li>userCount</li>
+    </ul></li>
+  <li>Rows per page: 100</li>
+  <li>Sort: SUM eventCount Descending</li>
+</ul>
+
+The image below shows these options configured:
+
+<img src="images/looker-studio-add-event-table.png" width=800 />
+
+To allow for filtering of the table by date, eventName, etc, add one or more "controls" using the "Add a control > Drop-down list" and placing the control above the table of events. Use the "Control field" setting to adjust which field the drop-down is filtering for. See the image below for an example, where the 'country' control drop-down is being configured:
+
+<img src="images/looker-studio-control-field.png" width=800 />
 
 ### Specific Event Drilldown Dashboard Page
 
