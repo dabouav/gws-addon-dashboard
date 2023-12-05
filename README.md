@@ -260,4 +260,21 @@ To allow for filtering of the table by date, eventName, etc, add one or more "co
 
 ### Specific Event Drilldown Dashboard Page
 
+At this point you have a very useful dashboard that highlights usage and lets you monitor specific events. Regarding the events, it may be helpful to create further pages in your dashboard that drill into the specifics of particulst events. For example, I may want to have a page just for events related to assignments that have been graded, where I can drill-down on the differet event specific details related to that event. To do this, you will need to go back to BigQuery and create a scheduled query that queries against the eventTallies table, after which you can visualize that data in your dashboard. 
 
+The query below shows an example of how this could be done:
+
+```
+CREATE OR REPLACE TABLE `<project-id>.flubarooEventData.gradingData` AS 
+SELECT date,
+       country, 
+       JSON_VALUE(eventSpecificDetailsJson.isSampleAssignment) as isSampleAssignment,
+       JSON_VALUE(eventSpecificDetailsJson.gradedWithAutoGrade) as gradedWithAutoGrade,
+       JSON_VALUE(eventSpecificDetailsJson.usedCustomFormulas) as usedCustomFormulas,
+       event_count as gradingOccurrences,
+       user_count as userCount
+FROM `<project-id>.flubarooEventData.eventTallies`
+WHERE event_name = "FLB_EVENT_ASSIGNMENT_GRADED";
+```
+## Step 6: Share Your Dashboard
+Once your dashboard has been completed and tested, you can share it with others. Click the blue "+Share button in the top-right of the LookerStudio Report editor and add one or more individuals or groups with "Viewer" access. 
