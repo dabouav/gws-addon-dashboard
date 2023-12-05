@@ -1,7 +1,7 @@
 # Instructions for creating a usage dashboard for your Google Workspace Add-on
 By: Dave Abouav
 <br>
-Last Updated: October 30, 2023
+Last Updated: December 5, 2023
 
 At the moment, Add-ons in Google Workspace offer only basic usage analytics via the [Workspace Marketplace SDK](https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/googleapps_sdk_dashboard). These include install data broken out by domains and seats (for Add-ons installed by Workspace admins), and individual end-user installs. This is useful information, but doesn't tell you much about who is actively using your Add-on, nor give you the ability to breakdown that usage by different dimensions.
 
