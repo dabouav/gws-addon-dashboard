@@ -1,7 +1,7 @@
 # Instructions for creating a usage dashboard for your Google Workspace Add-on
 By: Dave Abouav
 <br>
-Last Updated: December 5, 2023
+Last Updated: December 18, 2023
 
 *This is not an officially supported Google product.*
 
@@ -9,7 +9,7 @@ At the moment, Add-ons in Google Workspace offer only basic usage analytics via 
 
 The code and instructions in this repo will help you gather and visualize Add-on usage data, such as active usage of your Add-on broken out by user characteristics. It also shows you how to log specific events that correspond to use you want to track (i.e. new installs, uses of particular features, etc). You can copy the contents of <code>dashboard.gs</code> into your Apps Script project to get started. This project was developed to help me study usage of my [open-source](https://github.com/edcodeorg/flubaroo), Sheets Add-on [Flubaroo](https://workspace.google.com/marketplace/app/flubaroo/817638980086), which lets teachers grade assignments. Hence you'll see references to "grading assignments" in my description below when discussing app-specific logging. The majority of the code and examples given are generic though, and can be used for any Add-on.
 
-<img src="images/dashboard-header-image.png" width=800 />
+<img src="images/dashboard-header-image2.png" width=800 />
 
 ## Step 1: Requirements and Initial Setup
 
@@ -232,7 +232,7 @@ Place the table chart object somewhere on the page, and use these options for th
 ### Customizing Your Dasboard
 You can add text boxes, chart headers, fitlers, and various other stylings to customize your dashboard to your liking. The image below shows the final product for the usage page of Flubaroo's dashboard:
 
-<img src="images/looker-studio-usage-dash-page.png" width=800 />
+<img src="images/dashboard-header-image2.png" width=800 />
 
 ### Event Dashboard Page
 
