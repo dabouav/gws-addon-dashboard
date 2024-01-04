@@ -226,7 +226,7 @@ Place the table chart object somewhere on the page, and use these options for th
   <li>Metric: SUM dau30</li>
   <li>Rows per page: 100
   <li>Sort: SUM dau30 Descending</li>
-  <li>Default date range: Custom > Todayu</li>
+  <li>Default date range: Custom > Today</li>
 </ul>
 
 ### Customizing Your Dasboard
