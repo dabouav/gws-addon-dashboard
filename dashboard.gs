@@ -150,7 +150,10 @@ function logDailyPing()
       lifetimeGradeCount: lifetimeGradeCount,
     };
       
-  up.setProperty(USER_PROP_LAST_DAILY_PING, timeMs.toString());  
+  up.setProperty(USER_PROP_LAST_DAILY_PING, timeMs.toString());
+
+  // Note: if using V8 runtime, you may need to use Logger.log below instead of console.log
+  // until this bug is resolved: https://issuetracker.google.com/issues/133278375
   console.log({message: addOnName + 'DailyPing', pingData: parameters});
 }
 
@@ -227,6 +230,8 @@ function logEvent(eventName, eventSpecificDetails)
       eventSpecificDetails: eventSpecificDetailsStr
     };
 
+  // Note: if using V8 runtime, you may need to use Logger.log below instead of console.log
+  // until this bug is resolved: https://issuetracker.google.com/issues/133278375
   console.log({message: addOnName + 'EventLog', eventData: parameters});
 }
 
