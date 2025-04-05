@@ -1,7 +1,7 @@
 # Instructions for creating a usage dashboard for your Google Workspace Add-on
 By: Dave Abouav
 <br>
-Last Updated: December 18, 2023
+Last Updated: April 5, 2025
 
 *This is not an officially supported Google product.*
 
@@ -93,7 +93,6 @@ Inclusion Filter:
 "flubarooDailyPing"
 resource.type="app_script_function"
 logName="projects/<project-id-your-project-id-here>/logs/script.googleapis.com%2Fconsole_logs"
-severity=DEBUG
 ```
 
 ### Route Event Logs
